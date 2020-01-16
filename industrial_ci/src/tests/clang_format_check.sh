@@ -18,6 +18,7 @@
 function run_clang_format_check() {
   local err=0
   local path; path=$(mktemp -d)
+  target_ws=~/target_ws
 
   DOCKER_IMAGE="$DOCKER_BASE_IMAGE" ici_require_run_in_docker # this script must be run in docker
 
@@ -30,7 +31,7 @@ function run_clang_format_check() {
 
   local -a sources
   ici_parse_env_array sources TARGET_WORKSPACE
-  ici_run "prepare_sourcespace" ici_prepare_sourcespace "$path" "${sources[@]}"
+  ici_run "prepare_sourcespace" ici_prepare_sourcespace "$target_ws/src" "${sources[@]}"
 
   ici_time_start run_clang_format_check
   while read -r file; do
