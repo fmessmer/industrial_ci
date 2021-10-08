@@ -72,9 +72,8 @@ def main(scripts_dir, argv):
         sys.exit(0)
 
     ranges = parse_ranges(args, -1)
-
-    run_ci = [os.path.join(scripts_dir, "run_ci"), os.path.dirname(path), filter_env(global_env)]
-    run_ci_diff = [os.path.join(scripts_dir, "run_ci"), os.path.dirname(path), highlight_diff(global_env, 44)]
+    run_ci = [os.path.join(scripts_dir, "run_ci"), os.getcwd(), filter_env(global_env)]
+    run_ci_diff = [os.path.join(scripts_dir, "run_ci"), os.getcwd(), highlight_diff(global_env, 44)]
 
     bash = ['env', '-i'] +list(map(gen_env, ['DOCKER_PORT', 'HOME', 'PATH', 'SSH_AUTH_SOCK', 'TERM'])) + ['bash','-e']
 
